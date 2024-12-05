@@ -18,7 +18,7 @@ public class Main {
         produtoController.createProduto(5, "Tênis", "Calçados", 149.90);
         produtoController.createProduto(6, "Smartphone", "Eletrônicos", 1999.90);
 
-        Usuario usuario = new Usuario();
+        Usuario usuario = new Usuario(produtoController.getProdutos().get(0));
 
         while (true) {
             // Menu de opções
@@ -68,12 +68,7 @@ public class Main {
                     int idAtualizar = scanner.nextInt();
                     System.out.print("Digite o novo preço: ");
                     double precoNovo = scanner.nextDouble();
-                    Produto produtoAtualizado = produtoController.atualizarPreco(idAtualizar, precoNovo);
-                    if (produtoAtualizado != null) {
-                        System.out.println("Preço do produto " + produtoAtualizado.getNome() + " atualizado para R$" + precoNovo);
-                    } else {
-                        System.out.println("Produto não encontrado.");
-                    }
+                    produtoController.atualizarPreco(idAtualizar, precoNovo);
                     break;
 
                 case 5: // Inscrever com observer

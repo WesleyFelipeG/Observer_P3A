@@ -1,13 +1,16 @@
 package br.edu.iesp.demo.controller;
 
-import br.edu.iesp.demo.model.Observer;
+import br.edu.iesp.demo.model.ISubscriber;
 import br.edu.iesp.demo.model.Produto;
+import br.edu.iesp.demo.model.Publisher;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observer;
 
 public class ProdutoController {
     private final List<Produto> produtos;
+    private Publisher publisher = new Publisher();
 
     public ProdutoController() {
         produtos = new ArrayList<>();
@@ -29,6 +32,7 @@ public class ProdutoController {
         for (Produto produto : produtos) {
             if (produto.getId() == id) {
                 produto.setPreco(precoNovo);
+                publisher.update(produto);
                 return produto;
             }
         }
@@ -41,24 +45,12 @@ public class ProdutoController {
     }
 
     // Método para adicionar um observador
-    public void addObserverToProduto(int id, Observer observer) {
-        for (Produto produto : produtos) {
-            if (produto.getId() == id) {
-                produto.addObserver(observer);
-                return;
-            }
-        }
-        System.out.println("Produto com ID " + id + " não encontrado.");
+    public void addObserverToProduto(int id, ISubscriber observer) {
+        publisher.subscribe(observer);
     }
 
     // Método para remover um observador
-    public void removeObserverFromProduto(int id, Observer observer) {
-        for (Produto produto : produtos) {
-            if (produto.getId() == id) {
-                produto.removeObserver(observer);
-                return;
-            }
-        }
-        System.out.println("Produto com ID " + id + " não encontrado.");
+    public void removeObserverFromProduto(int id, ISubscriber observer) {
+        publisher.unsubscribe(observer);
     }
 }
