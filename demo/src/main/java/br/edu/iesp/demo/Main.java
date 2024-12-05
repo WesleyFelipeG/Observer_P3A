@@ -2,95 +2,102 @@ package br.edu.iesp.demo;
 
 import br.edu.iesp.demo.controller.ProdutoController;
 import br.edu.iesp.demo.model.Produto;
-import br.edu.iesp.demo.model.Usuario;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        ProdutoController produtoController = new ProdutoController();
         Scanner scanner = new Scanner(System.in);
+        ProdutoController produtoController = new ProdutoController();
 
+        // Adiciona produtos fixos para teste
         produtoController.createProduto(1, "PlayStation", "Console", 999.90);
         produtoController.createProduto(2, "Xbox", "Console", 999.90);
         produtoController.createProduto(3, "Camisa", "Vestuário", 39.90);
+<<<<<<< HEAD
         produtoController.createProduto(4, "Notebook", "Eletrônicos", 2500.00);
         produtoController.createProduto(5, "Tênis", "Calçados", 149.90);
         produtoController.createProduto(6, "Smartphone", "Eletrônicos", 1999.90);
 
         Usuario usuario = new Usuario(produtoController.getProdutos().get(0));
+=======
+>>>>>>> main
 
+        //Terminal para testes
         while (true) {
-            // Menu de opções
             System.out.println("Escolha uma opção:");
-            System.out.println("1 - Listar produtos");
-            System.out.println("2 - Criar produto");
-            System.out.println("3 - Remover produto");
-            System.out.println("4 - Atualizar preço");
-            System.out.println("5 - Inscrever com observer");
-            System.out.println("6 - Desinscrever com observer");
-            System.out.println("7 - Sair");
-
+            System.out.println("1 - Criar Produto");
+            System.out.println("2 - Atualizar Preço");
+            System.out.println("3 - Remover Produto");
+            System.out.println("4 - Listar Produtos");
+            System.out.println("5 - Sair");
+            System.out.print(": ");
             int opcao = scanner.nextInt();
-            switch (opcao) {
-                case 1: // Listar produtos
-                    System.out.println("Produtos cadastrados:");
-                    for (Produto produto : produtoController.getProdutos()) {
-                        System.out.println("ID: " + produto.getId() + " | Nome: " + produto.getNome() + " | Categoria: " + produto.getCategoria() + " | Preço: R$" + produto.getPreco());
-                    }
-                    break;
+            scanner.nextLine();  // Limpar Scanner
 
-                case 2: // Criar produto
+
+            // Lógica para as opções
+            switch (opcao) {
+                case 1: // Criar um novo produto
                     System.out.print("Digite o ID do produto: ");
                     int id = scanner.nextInt();
-                    scanner.nextLine();  // Consumir a linha pendente
+                    scanner.nextLine();  // Limpar Scanner
                     System.out.print("Digite o nome do produto: ");
                     String nome = scanner.nextLine();
                     System.out.print("Digite a categoria do produto: ");
                     String categoria = scanner.nextLine();
                     System.out.print("Digite o preço do produto: ");
                     double preco = scanner.nextDouble();
-                    produtoController.createProduto(id, nome, categoria, preco);
+                    scanner.nextLine();  // Limpar Scanner
+                    Produto novoProduto = produtoController.createProduto(id, nome, categoria, preco);
+                    System.out.println("Produto criado: " + novoProduto);
                     break;
 
-                case 3: // Remover produto
+                case 2: // Atualizar o preço de um produto
+                    System.out.print("Digite o ID do produto a ser atualizado: ");
+                    int idAtualizar = scanner.nextInt();
+                    System.out.print("Digite o novo preço: ");
+<<<<<<< HEAD
+                    double precoNovo = scanner.nextDouble();
+                    produtoController.atualizarPreco(idAtualizar, precoNovo);
+=======
+                    double novoPreco = scanner.nextDouble();
+                    scanner.nextLine();  // Limmpar Scanner
+                    Produto produtoAtualizado = produtoController.atualizarPreco(idAtualizar, novoPreco);
+                    if (produtoAtualizado != null) {
+                        System.out.println("Preço atualizado: " + produtoAtualizado);
+                    } else {
+                        System.out.println("Produto não encontrado!");
+                    }
+>>>>>>> main
+                    break;
+
+                case 3: // Remover um produto pelo ID
                     System.out.print("Digite o ID do produto a ser removido: ");
                     int idRemover = scanner.nextInt();
-                    if (produtoController.removerProduto(idRemover)) {
-                        System.out.println("Produto removido com sucesso.");
+                    scanner.nextLine();  // Limpar Scanner
+                    boolean removido = produtoController.removerProduto(idRemover);
+                    if (removido) {
+                        System.out.println("Produto removido.");
                     } else {
-                        System.out.println("Produto não encontrado.");
+                        System.out.println("Produto não encontrado!");
                     }
                     break;
 
-                case 4: // Atualizar preço
-                    System.out.print("Digite o ID do produto: ");
-                    int idAtualizar = scanner.nextInt();
-                    System.out.print("Digite o novo preço: ");
-                    double precoNovo = scanner.nextDouble();
-                    produtoController.atualizarPreco(idAtualizar, precoNovo);
+                case 4: // Lista todos os produtos
+                    System.out.println("Lista de produtos:");
+                    for (Produto p : produtoController.getProdutos()) {
+                        System.out.println(p);
+                    }
                     break;
 
-                case 5: // Inscrever com observer
-                    System.out.print("Digite o ID do produto para inscrever o observer: ");
-                    int idInscrever = scanner.nextInt();
-                    produtoController.addObserverToProduto(idInscrever, usuario);
-                    System.out.println("Usuário inscrito como observador do produto.");
-                    break;
-
-                case 6: // Desinscrever com observer
-                    System.out.print("Digite o ID do produto para desinscrever o observer: ");
-                    int idDesinscrever = scanner.nextInt();
-                    produtoController.removeObserverFromProduto(idDesinscrever, usuario);
-                    System.out.println("Usuário desinscrito do produto.");
-                    break;
-
-                case 7: // Sair
-                    System.out.println("Saindo...");
+                case 5: // Fechar o programa
+                    System.out.println("Fechando o programa ...");
+                    scanner.close();
                     return;
 
                 default:
-                    System.out.println("Opção inválida.");
+                    System.out.println("Opção inválida!");
             }
         }
     }
