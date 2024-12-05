@@ -14,6 +14,14 @@ public class Main {
         produtoController.createProduto(1, "PlayStation", "Console", 999.90);
         produtoController.createProduto(2, "Xbox", "Console", 999.90);
         produtoController.createProduto(3, "Camisa", "Vestuário", 39.90);
+<<<<<<< HEAD
+        produtoController.createProduto(4, "Notebook", "Eletrônicos", 2500.00);
+        produtoController.createProduto(5, "Tênis", "Calçados", 149.90);
+        produtoController.createProduto(6, "Smartphone", "Eletrônicos", 1999.90);
+
+        Usuario usuario = new Usuario(produtoController.getProdutos().get(0));
+=======
+>>>>>>> main
 
         //Terminal para testes
         while (true) {
@@ -49,6 +57,10 @@ public class Main {
                     System.out.print("Digite o ID do produto a ser atualizado: ");
                     int idAtualizar = scanner.nextInt();
                     System.out.print("Digite o novo preço: ");
+<<<<<<< HEAD
+                    double precoNovo = scanner.nextDouble();
+                    produtoController.atualizarPreco(idAtualizar, precoNovo);
+=======
                     double novoPreco = scanner.nextDouble();
                     scanner.nextLine();  // Limmpar Scanner
                     Produto produtoAtualizado = produtoController.atualizarPreco(idAtualizar, novoPreco);
@@ -57,6 +69,7 @@ public class Main {
                     } else {
                         System.out.println("Produto não encontrado!");
                     }
+>>>>>>> main
                     break;
 
                 case 3: // Remover um produto pelo ID

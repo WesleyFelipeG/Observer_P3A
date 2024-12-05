@@ -1,15 +1,27 @@
 package br.edu.iesp.demo.controller;
 
+<<<<<<< HEAD
+import br.edu.iesp.demo.model.ISubscriber;
+import br.edu.iesp.demo.model.Produto;
+import br.edu.iesp.demo.model.Publisher;
+=======
 import br.edu.iesp.demo.model.Produto;
 import lombok.Getter;
+>>>>>>> main
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observer;
 
 @Getter
 public class ProdutoController {
+<<<<<<< HEAD
+    private final List<Produto> produtos;
+    private Publisher publisher = new Publisher();
+=======
     // Simula um banco de dados
     private List<Produto> produtos;
+>>>>>>> main
 
     public ProdutoController() {
         produtos = new ArrayList<>();
@@ -27,6 +39,7 @@ public class ProdutoController {
         for (Produto produto : produtos) {
             if (produto.getId() == id) {
                 produto.setPreco(precoNovo);
+                publisher.update(produto);
                 return produto;
             }
         }
@@ -37,4 +50,17 @@ public class ProdutoController {
     public boolean removerProduto(int id) {
         return produtos.removeIf(produto -> produto.getId() == id);
     }
+<<<<<<< HEAD
+
+    // Método para adicionar um observador
+    public void addObserverToProduto(int id, ISubscriber observer) {
+        publisher.subscribe(observer);
+    }
+
+    // Método para remover um observador
+    public void removeObserverFromProduto(int id, ISubscriber observer) {
+        publisher.unsubscribe(observer);
+    }
+=======
+>>>>>>> main
 }
