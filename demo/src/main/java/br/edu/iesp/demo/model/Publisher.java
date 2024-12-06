@@ -3,7 +3,6 @@ package br.edu.iesp.demo.model;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Publisher implements ISubscriber{
     private List<ISubscriber> subscribers = new ArrayList<>();
     private Produto mainState;
@@ -26,5 +25,11 @@ public class Publisher implements ISubscriber{
     public void update(Produto produto) {
         mainState = produto;
         notifySubscribers(mainState);
+    }
+
+    public void listSubscribers() {
+        for (ISubscriber subscriber : subscribers) {
+            System.out.println(subscriber);
+        }
     }
 }

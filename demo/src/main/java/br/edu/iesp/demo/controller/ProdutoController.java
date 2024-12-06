@@ -16,6 +16,10 @@ public class ProdutoController {
         produtos = new ArrayList<>();
     }
 
+    public void listSubscribers() {
+        publisher.listSubscribers();
+    }
+
     // Método para listar os produtos
     public List<Produto> getProdutos() {
         return produtos;
