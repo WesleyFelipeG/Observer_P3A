@@ -3,10 +3,9 @@ package br.edu.iesp.demo.model;
 import java.util.ArrayList;
 import java.util.List;
 
+public class Publisher {
 
-public class Publisher implements ISubscriber{
-    private List<ISubscriber> subscribers = new ArrayList<>();
-    private Produto mainState;
+    private final List<ISubscriber> subscribers = new ArrayList<>();
 
     public void subscribe(ISubscriber subscriber) {
         subscribers.add(subscriber);
@@ -16,15 +15,9 @@ public class Publisher implements ISubscriber{
         subscribers.remove(subscriber);
     }
 
-    public void notifySubscribers(Produto produto) {
+    public void notifySubscribers(Product product) {
         for (ISubscriber subscriber : subscribers) {
-            subscriber.update(produto);
+            subscriber.update(product);
         }
-    }
-
-    @Override
-    public void update(Produto produto) {
-        mainState = produto;
-        notifySubscribers(mainState);
     }
 }
