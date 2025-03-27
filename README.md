@@ -1,1 +1,1 @@
-# Simulação de um Observer em Java
+# Apresentação do padrão de projeto "Oberserver", utilizando Java
